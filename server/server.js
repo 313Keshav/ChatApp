@@ -7,7 +7,7 @@ const port=process.env.PORT || 3000
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const publicPath=path.join(__dirname, "/../public")
+const publicPath=path.join(__dirname, "/../public") //Comment
 
 const app=express()
 
