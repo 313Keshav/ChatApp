@@ -5,7 +5,7 @@ import express from "express";
 import { Server as socketIO } from "socket.io";
 import http from "http";
 import { config } from "dotenv";
-import { generateMessage } from "./utils/message.js";
+import { generateMessage,generateLocationMessage } from "./utils/message.js";
 
 const app = express();
 config();
@@ -28,18 +28,12 @@ io.on('connection', (socket) => {
     socket.on('createMessage', (message, callback) => {
         console.log("createMessage", message);
         io.emit('newMessage', generateMessage(message.from, message.text));
-        
-        // Log the type and existence of the callback
-        console.log("Type of callback:", typeof callback);
-        console.log("Callback exists:", !!callback);
-
-        if (typeof callback === 'function') {
-            // console.log("Calling callback with 'This is the server'");
-            callback('This is the server');  // Ensure this is being called
-        } else {
-            console.log("Callback is not a function");
-        }
     });
+
+    socket.on('createLocationMessage',(coords)=>{
+        io.emit('newLocationMessage',generateLocationMessage('Admin',coords.lat,coords.lng))
+    })
+
 
     socket.on('disconnect', () => {
         console.log('User was disconnected');
@@ -49,3 +43,5 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+
