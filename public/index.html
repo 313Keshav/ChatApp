@@ -3,22 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat App</title>
 </head>
 <body>
     <p>Welcome to my Chat App</p>
 
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-         const socket=io();  //Will try to make a requst to backend
-
-         socket.on('connect',()=>{
-            console.log("Connected to server");
-         })
-
-         socket.on('disconnect',()=>{
-            console.log('Disconnected from the server');
-         })
-    </script>   
+    <script type="text/javascript" src="/js/index.js"></script>   
 </body>
 </html>
